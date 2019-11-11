@@ -5,13 +5,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 import ua.nure.kn.chychkanov.usermanagement.User;
 
 public class HsqldbUserDao implements UserDao {
 	
+	private static final String SELECT_ALL_QUERY = "SELECT id, firstname, lastname, dateofbirth FROM users";
 	private static final String INSERT_QUERY = "INSERT INTO users (firstname, lastname, dateofbirth) VALUES (?, ?, ?)";
 	private ConnectionFactory connectionFactory;
 	
@@ -26,7 +29,7 @@ public class HsqldbUserDao implements UserDao {
 			PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
 			statement.setString(1, user.getFirstName());
 			statement.setString(2, user.getLastName());
-			statement.setDate(3, new Date(user.getDateOfBirth().getTime()));
+			statement.setDate(3, new java.sql.Date(user.getDateOfBirth().getTime()));
 			int n = statement.executeUpdate();
 			if (n != 1) {
 				throw new DatabaseException("Number of the inserted rows: " + n);
@@ -64,8 +67,27 @@ public class HsqldbUserDao implements UserDao {
 	}
 
 	public Collection findAll() throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+		Collection result = new LinkedList();
+		
+		try {
+			Connection connection = connectionFactory.createConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(SELECT_ALL_QUERY);
+			while(resultSet.next()) {
+				User user= new User();
+				user.setId(new Long(resultSet.getLong(1)));
+				user.setFirstName(resultSet.getString(2));
+				user.setLastName(resultSet.getString(3));
+				user.setDateOfBirth(resultSet.getDate(4));
+				result.add(user);
+			}
+		} catch (DatabaseException e) {
+			throw e;
+		} catch(SQLException e) {
+			throw new DatabaseException(e);
+		}
+		
+		return result;
 	}
 
 }
