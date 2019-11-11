@@ -31,13 +31,13 @@ public class DaoFactory {
 		return new ConnectionFactoryImpl(driver,url,user,password);
 	}
 	
-	public UserDao getUserDao() throws InstantiationException, IllegalAccessException {
+	public UserDao getUserDao()throws IOException {
 		UserDao result = null;
 		try {
 			Class clazz = Class.forName(properties.getProperty(USER_DAO));
-			UserDao userDao = (UserDao) clazz.newInstance();
-			userDao.setConnectionFactory(getConnectionFactory());
-		} catch (ClassNotFoundException e) {
+			result = (UserDao) clazz.newInstance();
+			result.setConnectionFactory(getConnectionFactory());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 		return result;
