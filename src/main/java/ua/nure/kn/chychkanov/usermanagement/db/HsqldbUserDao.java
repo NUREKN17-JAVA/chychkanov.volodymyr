@@ -1,12 +1,10 @@
 package ua.nure.kn.chychkanov.usermanagement.db;
 
+import java.util.Collection;
+
 import ua.nure.kn.chychkanov.usermanagement.User;
 
 public class HsqldbUserDao implements UserDao {
-
-	public HsqldbUserDao() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public User create(User user) throws DatabaseException {
@@ -28,6 +26,12 @@ public class HsqldbUserDao implements UserDao {
 
 	@Override
 	public User find(Long id) throws DatabaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<?> findAll() throws DatabaseException {
 		// TODO Auto-generated method stub
 		return null;
 	}

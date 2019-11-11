@@ -2,6 +2,11 @@ package ua.nure.kn.chychkanov.usermanagement.db;
 
 public class DatabaseException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DatabaseException() {
 		// TODO Auto-generated constructor stub
 	}
