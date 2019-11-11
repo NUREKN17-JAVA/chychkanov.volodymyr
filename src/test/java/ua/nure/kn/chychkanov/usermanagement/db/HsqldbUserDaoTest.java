@@ -6,27 +6,30 @@ import junit.framework.TestCase;
 import ua.nure.kn.chychkanov.usermanagement.User;
 
 public class HsqldbUserDaoTest extends TestCase {
-	HsqldbUserDao dao;
+	private HsqldbUserDao dao;
+	private ConnectionFactory connectionFactory;
+	
 	protected void setUp() throws Exception {
 		super.setUp();
-		dao=new HsqldbUserDao();
+		connectionFactory = new ConnectionFactoryImpl();
+		dao = new HsqldbUserDao(connectionFactory);
 	}
 
 	public void testCreate() {
 		try {
-			User user=new User();
+			User user = new User();
 			user.setFirstName("John");
-			user.setLastName("Doe");;
+			user.setLastName("Doe");
 			user.setDateOfBirth(new Date());
 			assertNull(user.getId());
-			user=dao.create(user);	
-//			assertNotNull(user);
-//			assertNotNull(user.getId());
-			} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
+			user = dao.create(user);
+			assertNotNull(user);
+			assertNotNull(user.getId());
+		} catch (DatabaseException e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
+		
 	}
 
 }
