@@ -2,19 +2,28 @@ package ua.nure.kn.chychkanov.usermanagement.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import ua.nure.kn.chychkanov.usermanagement.util.Messages;
 
 public class AddPanel extends JPanel implements ActionListener {
 	
 	private MainFrame parent;
 	private JPanel buttonPanel;
-	private Component fieldPanel;
+	private JPanel fieldPanel;
 	private JButton cancelButton;
 	private JButton okButton;
+	private JTextField lastNameField;
+	private JTextField firstNameField;
+	private JTextField dateOfBirthField;
 
 	public AddPanel(MainFrame parent) {
 		this.parent = parent;
@@ -22,6 +31,7 @@ public class AddPanel extends JPanel implements ActionListener {
 	}
 
 	private void initialize() {
+		this.setName("addPanel"); //$NON-NLS-1$
 		this.setLayout(new BorderLayout());
 		this.add(getFieldPanel(), BorderLayout.NORTH);
 		this.add(getButtonPanel(),BorderLayout.SOUTH);
@@ -39,9 +49,9 @@ public class AddPanel extends JPanel implements ActionListener {
 	private JButton getCancelButton() {
 		if (cancelButton == null){
 			cancelButton = new JButton();
-			cancelButton.setText("Отмена");
-			cancelButton.setName("cancelButton");
-			cancelButton.setActionCommand("cancel");
+			cancelButton.setText(Messages.getString("AddPanel.cancel")); //$NON-NLS-1$
+			cancelButton.setName("cancelButton"); //$NON-NLS-1$
+			cancelButton.setActionCommand("cancel"); //$NON-NLS-1$
 			cancelButton.addActionListener(this);
 		}		return cancelButton;
 	}
@@ -49,16 +59,58 @@ public class AddPanel extends JPanel implements ActionListener {
 	private JButton getOkButton() {
 			if (okButton == null){
 				okButton = new JButton();
-				okButton.setText("Ok");
-				okButton.setName("okButton");
-				okButton.setActionCommand("ok");
+				okButton.setText(Messages.getString("AddPanel.ok")); //$NON-NLS-1$
+				okButton.setName("okButton"); //$NON-NLS-1$
+				okButton.setActionCommand("ok"); //$NON-NLS-1$
 				okButton.addActionListener(this);
 			}
 			return okButton;
 		}		
 
-	private Component getFieldPanel() {
+	private JPanel getFieldPanel() {
+		if (fieldPanel == null) {
+			fieldPanel = new JPanel();
+			fieldPanel.setLayout(new GridLayout(3, 2));
+			addLabelField(fieldPanel, Messages.getString("AddPanel.first_name"), getFirstNameField()); //$NON-NLS-1$
+			addLabelField(fieldPanel, Messages.getString("AddPanel.last_name"), getLastNameField()); //$NON-NLS-1$
+			addLabelField(fieldPanel, Messages.getString("AddPanel.date_of_birth"), getDateOfBirthField()); //$NON-NLS-1$
+		}
 		return fieldPanel;
+	}
+
+
+
+	private JTextField getDateOfBirthField() {
+		if(dateOfBirthField == null) {
+			dateOfBirthField = new JTextField();
+			dateOfBirthField.setName("dateOfBirthField"); //$NON-NLS-1$
+			
+		}
+			return dateOfBirthField;
+	}
+
+	private JTextField getLastNameField() {
+		if(lastNameField == null) {
+			lastNameField = new JTextField();
+			lastNameField.setName("lastNameField"); //$NON-NLS-1$
+		}
+		return lastNameField;
+	}
+
+	private void addLabelField(JPanel panel, String labelText, JTextField textField) {
+		JLabel label = new JLabel(labelText);
+		label.setLabelFor(textField);
+		panel.add(label);
+		panel.add(textField);
+		
+	}
+
+	private JTextField getFirstNameField() {
+		if(firstNameField == null) {
+			firstNameField = new JTextField();
+			firstNameField.setName("firstNameField"); //$NON-NLS-1$
+		}
+		return firstNameField;
 	}
 
 	@Override

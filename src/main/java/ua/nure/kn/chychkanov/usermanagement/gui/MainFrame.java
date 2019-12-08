@@ -7,12 +7,15 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ua.nure.kn.chychkanov.usermanagement.util.Messages;
+
 public class MainFrame extends JFrame {
 	
 	private static final int FRAME_HEIGTH = 600;
 	private static final int FRAME_WIDTH = 800;
 	private JPanel contentPanel;
 	private JPanel browsePanel;
+	private AddPanel addPanel;
 
 	public MainFrame() {
 		super();
@@ -22,7 +25,7 @@ public class MainFrame extends JFrame {
 	private void initialize() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGTH);
-		this.setTitle("”правление пользовател€ми");
+		this.setTitle(Messages.getString("MainFrame.user_management")); //$NON-NLS-1$
 		this.setContentPane(getContentPanel());
 	}
 
@@ -57,8 +60,10 @@ public class MainFrame extends JFrame {
 	}
 
 	private AddPanel getAddPanel() {
-		
-		return null;
+		if(addPanel == null) {
+			addPanel = new AddPanel(this);
+		}
+		return addPanel;
 	}
 	
 	}
