@@ -6,11 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import ua.nure.kn.chychkanov.usermanagement.db.DatabaseException;
 import ua.nure.kn.chychkanov.usermanagement.util.Messages;
 
 public class BrowsePanel extends JPanel implements ActionListener {
@@ -23,6 +27,7 @@ public class BrowsePanel extends JPanel implements ActionListener {
 	private JButton editButton;
 	private JScrollPane tablePanel;
 	private JTable userTable;
+	private AbstractButton getUserTable;
 
 	public BrowsePanel(MainFrame frame) {
 		parent = frame;
@@ -103,16 +108,31 @@ public class BrowsePanel extends JPanel implements ActionListener {
 			if(userTable == null) {
 				userTable = new JTable();
 				userTable.setName("userTable"); //$NON-NLS-1$
-				UserTableModel model = new UserTableModel(new ArrayList());
-				userTable.setModel(model);
 			}
 		return userTable;
+	}
+
+	public void initTable() {
+		UserTableModel model;
+		try{
+			model = new UserTableModel(((MainFrame) parent).getDao().findAll());
+		} catch (DatabaseException e) {
+			model = new UserTableModel(new ArrayList());
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		getUserTable.setModel((ButtonModel) model);
+	}
+
+	private Object findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 		if("add".equalsIgnoreCase(actionCommand)) { //$NON-NLS-1$
+			
 			this.setVisible(false);
 			((MainFrame) parent).showAddPanel();
 		}
