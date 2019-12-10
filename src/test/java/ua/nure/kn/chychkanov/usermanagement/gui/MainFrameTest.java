@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.tree.ExpandVetoException;
 
+import com.mockobjects.dynamic.Mock;
+
 import junit.extensions.jfcunit.JFCTestCase;
 import junit.extensions.jfcunit.JFCTestHelper;
 import junit.extensions.jfcunit.eventdata.MouseEventData;
@@ -69,8 +71,8 @@ public class MainFrameTest extends JFCTestCase {
 		JTable table = (JTable) find(JTable.class, "userTable");
 		assertEquals(3, table.getColumnCount());
 		assertEquals("ID", table.getColumnName(0));
-		assertEquals("Èìÿ", table.getColumnName(1));
-		assertEquals("Ôàìèëèÿ", table.getColumnName(2));
+		assertEquals("ÃˆÃ¬Ã¿", table.getColumnName(1));
+		assertEquals("Ã”Ã Ã¬Ã¨Ã«Ã¨Ã¿", table.getColumnName(2));
 		find(JButton.class, "addButton");
 		find(JButton.class, "editButton");
 		find(JButton.class, "deleteButton");
@@ -122,5 +124,3 @@ public class MainFrameTest extends JFCTestCase {
 		}
 	}
 	}
-
-

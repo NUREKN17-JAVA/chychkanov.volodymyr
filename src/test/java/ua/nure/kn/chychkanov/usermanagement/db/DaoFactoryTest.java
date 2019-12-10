@@ -1,9 +1,5 @@
 package ua.nure.kn.chychkanov.usermanagement.db;
 
-import static ua.nure.kn.chychkanov.usermanagement.db.DaoFactory.getInstance;
-
-import java.io.IOException;
-
 import junit.framework.TestCase;
 
 public class DaoFactoryTest extends TestCase {
@@ -16,6 +12,8 @@ public class DaoFactoryTest extends TestCase {
 			assertNotNull("UserDao instance is null, userDao");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
+			fail(e.toString());
 		}
 	}
+
 }
