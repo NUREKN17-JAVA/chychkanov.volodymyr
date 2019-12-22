@@ -1,0 +1,17 @@
+Testsuite: ua.nure.kn.chychkanov.usermanagement.UserTest
+Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0,044 sec
+
+Testcase: testGetFullName took 0,003 sec
+	FAILED
+expected:<Chychkanov Volodymy[]> but was:<Chychkanov Volodymy[r]>
+junit.framework.ComparisonFailure: expected:<Chychkanov Volodymy[]> but was:<Chychkanov Volodymy[r]>
+	at ua.nure.kn.chychkanov.usermanagement.UserTest.testGetFullName(Unknown Source)
+	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
+
+Testcase: testGetAgeThisMonthEarlier took 0 sec
+Testcase: testGetAgeDayThisMonthLater took 0 sec
+Testcase: testGetAgeBirthdayLater took 0 sec
+Testcase: testGetAgeBirthdayToday took 0,001 sec
+Testcase: testGetAge took 0 sec
