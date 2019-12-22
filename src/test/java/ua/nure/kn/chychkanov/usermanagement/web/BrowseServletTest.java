@@ -19,7 +19,7 @@ public class BrowseServletTest extends MockServletTestCase {
 		List list = Collections.singletonList(user);
 		getMockUserDao().expectAndReturn("findAll", list);
 		doGet();
-		Collection collection = (Collection).getWebMockObjectFactory().getMockSession().getAtribute("users");
+		Collection collection = (Collection) getWebMockObjectFactory().getMockSession().getAttribute("users");
 		assertNotNull("Could not find list of users in session", collection);
 		assertSame(list, collection);
 	}
