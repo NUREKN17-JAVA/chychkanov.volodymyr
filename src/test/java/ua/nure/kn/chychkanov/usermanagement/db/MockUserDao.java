@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import ua.nure.kn.stoianov.usermanagement1.domain.User;
+import ua.nure.kn.chychkanov.usermanagement.User;
 
 public class MockUserDao implements UserDao {
 	private long id = 0;

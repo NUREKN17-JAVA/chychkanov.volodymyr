@@ -123,11 +123,6 @@ public class BrowsePanel extends JPanel implements ActionListener {
 		getUserTable.setModel((ButtonModel) model);
 	}
 
-	private Object findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
