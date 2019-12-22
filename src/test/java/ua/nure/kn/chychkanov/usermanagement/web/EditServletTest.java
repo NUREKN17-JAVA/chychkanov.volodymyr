@@ -18,7 +18,7 @@ public class EditServletTest extends MockServletTestCase {
         addRequestParameter("id", user.getId().toString());
         addRequestParameter("firstName", user.getFirstName());
         addRequestParameter("lastName", user.getLastName());
-        addRequestParameter("dateOfBirthd", DateFormat.getDateInstance().format(user.getDateOfBirth()));
+        addRequestParameter("dateOfBirth", DateFormat.getDateInstance().format(user.getDateOfBirth()));
         addRequestParameter("okButton", "Ok");
         doPost();
     }
