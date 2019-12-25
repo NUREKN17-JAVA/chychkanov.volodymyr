@@ -48,5 +48,18 @@ public class UserTableModel extends AbstractTableModel {
 		}
 		return null;
 	}
+	
+	public User getUser(int index ) {
+		return (User) users.get(index);
+	}
+
+	public void clearUsers() {
+		this.users = new ArrayList();
+	}
+
+	public void addUsers(Collection users2) {
+		this.users.addAll(users);
+		
+	}
 
 }

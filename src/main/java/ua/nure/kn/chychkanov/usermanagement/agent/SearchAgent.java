@@ -15,11 +15,13 @@ import ua.nure.kn.chychkanov.usermanagement.db.DatabaseException;
 public class SearchAgent extends Agent {
 
 	private AID[] aids;
+	private SearchGui gui = null;
 	
 	protected void setup() {
 		super.setup();
 		System.out.print(getAID().getName() + " sarted");
-
+		gui = new SearchGui(this);
+		gui.setVisible(true);
 		DFAgentDescription description = new DFAgentDescription();
 		description.setName(getAID());
 		ServiceDescription serviceDescription = new ServiceDescription();
@@ -31,7 +33,8 @@ public class SearchAgent extends Agent {
 		} catch (FIPAException e) {
 			e.printStackTrace();
 		}
-
+		gui.setVisible(false);
+		gui.dispose();
 
 		addBehaviour(new TickerBehaviour(this, 60000) {
 
@@ -80,6 +83,7 @@ public class SearchAgent extends Agent {
 	}
 
 	void showUsers(Collection user) {
+		gui.addUsers(user);
 	}
 
 }
