@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.StringTokenizer;
 
 import org.hsqldb.lib.Iterator;
-
+import java.util.LinkedList;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import ua.nure.kn.chychkanov.usermanagement.User;
@@ -32,8 +32,22 @@ public class RequestServer extends CyclicBehaviour {
 	}
 
 	private Collection parseMessage(ACLMessage message) {
-		// TODO Auto-generated method stub
-		return null;
+			Collection users = new LinkedList();
+
+			String content = message.getContent();
+			if (content != null) {
+			StringTokenizer tokenizer1 = new StringTokenizer(content, ";");
+			while (tokenizer1.hasMoreElements()) {
+				String userInfo = tokenizer1.nextToken();
+				StringTokenizer tokenizer2 = new StringTokenizer(userInfo, ",");
+				String id = tokenizer2.nextToken();
+				String firstName = tokenizer2.nextToken();
+				String lastName = tokenizer2.nextToken();
+				users.add(new User(new Long(id),firstName, lastName, null));
+
+			}
+		}
+		return users;
 	}
 
 	private ACLMessage createReply(ACLMessage message) {
